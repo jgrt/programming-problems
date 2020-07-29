@@ -1,5 +1,5 @@
 import pytest
-from problem1.solution import create_pattern
+from mathematics.problem1.solution import create_pattern
 
 
 def test_create_pattern_on_output_size():
@@ -18,6 +18,3 @@ def test_create_pattern_on_size_elements():
     resp = create_pattern(val)
     elements_len = list(map(len, resp))
     assert elements_len == [val*i for i in range(val, 0, -1)]
-
-
-

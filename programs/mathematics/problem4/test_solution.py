@@ -1,4 +1,4 @@
-from problem4.solution import check_sum_palindrome
+from mathematics.problem4.solution import check_sum_palindrome
 
 
 def test_check_sum_palindrome_on_palindrome_yes():

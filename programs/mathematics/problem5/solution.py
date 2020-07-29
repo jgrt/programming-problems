@@ -5,7 +5,7 @@ Given two numbers A and B, find Kth digit from right of A^B.
 
 Constraints:
 1 <= A , B <=15
-1 <= K <= |totaldigits in A^B|
+1 <= K <= |total digits in A^B|
 
 Example:
     Input: A = 3, B = 3, K = 1
