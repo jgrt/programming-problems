@@ -13,3 +13,21 @@ Constraints:
 Input: N = 23
 Output: 43
 """
+from pydantic import BaseModel, Field
+
+
+class ConstrainedInteger(BaseModel):
+    value: int = Field(..., ge=1, le=100)
+
+
+def swap_bits(value: int) -> int:
+    bin_repr = list(f"{value:08b}")
+    for i in range(0, len(bin_repr)-1, 2):
+        bin_repr[i], bin_repr[i+1] = bin_repr[i+1], bin_repr[i]
+    return int("".join(bin_repr), 2)
+
+
+if __name__ == '__main__':
+    value = 43
+    value = ConstrainedInteger(value=value).value
+    print(swap_bits(value))
