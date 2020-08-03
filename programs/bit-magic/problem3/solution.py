@@ -15,3 +15,26 @@ Constraints:
 Input: arr = 1 0 0 1 0
 Output: 4
 """
+from pydantic import BaseModel, Field, validator
+from typing import List
+
+
+class ConstrainedArray(BaseModel):
+    elements: List[int] = Field(..., min_items=1, max_items=pow(10, 4))
+
+    @validator("*", pre=True, each_item=True)
+    def elements_must_be_in_range(cls, v):
+        assert 0 <= v <= 1, 'must be in range {}'.format([0, 1])
+        return v
+
+
+def flip_bits(arr: List[int]) -> int:
+    zero_bits_seq = []
+    n = len(arr)
+    return 1
+
+
+if __name__ == '__main__':
+    arr = [1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0]
+    arr = ConstrainedArray(elements=arr).elements
+    print(flip_bits(arr))
