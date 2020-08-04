@@ -16,5 +16,33 @@ Input: N = 4
 Output: 0
 Input: N = 15
 Output: 1
-
 """
+from pydantic import BaseModel, Field
+from math import sqrt
+
+
+class ConstrainedInteger(BaseModel):
+    value: int = Field(..., ge=1, le=pow(10, 7))
+
+
+def is_triangular_number(n: int) -> int:
+    """
+    natural number series sum formula:
+    n(n+1)/2
+    let N is sum of from 1 to n numbers
+    n(n+1)/2 = N
+    n^2 + n = 2N
+    (n +1/2)^2 = 2N + 1/4
+    n + 1/2 = sqrt(1+8N)/2
+    n = (sqrt(1+8N)-1)/2
+    """
+    tri_s = (sqrt(1+8*n)-1)/2
+    if int(tri_s) == tri_s:
+        return 1
+    return 0
+
+
+if __name__ == '__main__':
+    n = 345
+    n = ConstrainedInteger(value=n).value
+    print(is_triangular_number(n))
