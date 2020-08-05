@@ -28,13 +28,25 @@ class ConstrainedArray(BaseModel):
         return v
 
 
-def flip_bits(arr: List[int]) -> int:
-    zero_bits_seq = []
-    n = len(arr)
-    return 1
+def flip_bits(a: List[int]) -> int:
+    n = len(a)
+    if a.count(0) == 0:
+        return n
+    ones = a.count(1)
+    a = list(map(lambda x: -1 if x == 1 else x, a))
+    a = list(map(lambda x: 1 if x == 0 else x, a))
+    max_so_far = 0
+    max_ending_here = 0
+    for i in range(n):
+        max_ending_here = max_ending_here + a[i]
+        if max_so_far < max_ending_here:
+            max_so_far = max_ending_here
+        if max_ending_here < 0:
+            max_ending_here = 0
+    return max_so_far+ones
 
 
 if __name__ == '__main__':
-    arr = [1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0]
+    arr = [1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0]
     arr = ConstrainedArray(elements=arr).elements
     print(flip_bits(arr))
