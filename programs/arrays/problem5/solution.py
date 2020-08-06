@@ -33,23 +33,23 @@ def is_valid_triangle(*args):
     return 1
 
 
-def find_triangles(arr):
-    # arr = ConstrainedArray(elements=arr).elements
-    # arr = sorted(set(arr))
+def find_triangles(arr: List[int]) -> int:
+    arr = sorted(set(arr))
     triangles = 0
     n = len(arr)
-    for i in range(0, n):
-        for j in range(i, n):
-            for k in range(j, n):
-                triangles += is_valid_triangle(arr[i], arr[j], arr[k])
+    for i in range(n-1, 1, -1):
+        j = 0
+        k = i-1
+        while j < k:
+            if arr[j]+arr[k] > arr[i]:
+                triangles += k-j
+                k -= 1
+            else:
+                j += 1
     return triangles
 
 
 if __name__ == "__main__":
-    input_array = list([3, 5, 4])
-    arr = ConstrainedArray(elements=input_array).elements
-    arr = sorted(set(arr))
-    start = time.time()
+    input_array = list(range(1, pow(10, 3)))
+    ConstrainedArray(elements=input_array)
     print(find_triangles(input_array))
-    end = time.time()
-    print(end-start)
