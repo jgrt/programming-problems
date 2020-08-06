@@ -18,7 +18,7 @@ from typing import List
 
 
 class ConstrainedArray(BaseModel):
-    elements: List[int] = Field(..., ge=1, le=pow(10, 5))
+    elements: List[int] = Field(..., min_items=1, max_items=pow(10, 5))
     count: int = Field(..., ge=1, le=pow(10, 5))
 
     @validator("elements", pre=True, each_item=True)
