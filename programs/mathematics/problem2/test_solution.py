@@ -1,5 +1,5 @@
 import pytest
-from problem2.solution import arithmetic_progression
+from mathematics.problem2.solution import arithmetic_progression
 
 
 def test_arithmetic_progression_on_progression():
@@ -9,5 +9,3 @@ def test_arithmetic_progression_on_progression():
     resp = arithmetic_progression(a, b, n)
     resp1 = arithmetic_progression(a, b, n-1)
     assert abs(b) - abs(a) == abs(resp) - abs(resp1)
-
-
