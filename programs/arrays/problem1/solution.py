@@ -24,29 +24,23 @@ class ConstrainedArray(BaseModel):
         return v
 
 
-def water_restored(arr):
+def water_restored(arr: List[int]) -> int:
     n = len(arr)
     w = 0
-    for i in range(1, n):
-        left_max = i-1
-        right_max = i+1
-        # while left_max > 0 and right_max < n-1:
-        while left_max > 0:
-            if arr[left_max-1] > arr[left_max]:
-                left_max = left_max-1
-                left_max -= 1
-        while right_max < n-1:
-            if arr[right_max+1] > arr[right_max]:
-                right_max = right_max+1
-                right_max += 1
-        print(i, left_max, right_max)
+    left_max = arr[0]
+    right_max = max(arr[1:])
+    for i in range(n-1):
+        if arr[i] > left_max:
+            left_max = arr[i]
+        if arr[i] == right_max:
+            right_max = max(arr[i + 1:])
+        h = min(left_max, right_max)
+        w += max(h - arr[i], 0)
+    return w
 
 
 if __name__ == "__main__":
-    arr = [1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
-    arr = ConstrainedArray(elements=arr).elements
-    water_restored(arr)
+    array = [3, 0, 0, 2, 0, 4]
 
-
-
-
+    ConstrainedArray(elements=array)
+    print(water_restored(array))
